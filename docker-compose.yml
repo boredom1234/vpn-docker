@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  vpn-proxy:
+    build: .
+    container_name: vpn-proxy
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - ./openvpn:/vpn:ro
+    ports:
+      - "8888:8888"
+    restart: unless-stopped
