@@ -1,3 +1,4 @@
+#!/bin/sh
 set -e
 
 OVPN_FILE="/vpn/client.ovpn"
@@ -13,13 +14,11 @@ echo "Starting OpenVPN..."
 openvpn --config "$OVPN_FILE" --daemon --log /var/log/openvpn.log
 
 echo "Waiting for tun device..."
-i=0
-while [ $i -lt 30 ]; do
+for i in $(seq 1 30); do
   if ip addr show dev tun0 >/dev/null 2>&1; then
     echo "tun0 available"
     break
   fi
-  i=$((i+1))
   sleep 1
 done
 
