@@ -12,6 +12,7 @@ services:
     ports:
       - "${HTTP_PROXY_PORT:-8888}:8888"
       - "${SOCKS_PROXY_PORT:-1080}:1080"
+      - "${DASHBOARD_PORT:-9090}:9090"
     environment:
       - OVPN_FILE=${OVPN_FILE:-client.ovpn}
       - PROXY_USER=${PROXY_USER}

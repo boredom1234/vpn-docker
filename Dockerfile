@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install OpenVPN + Tinyproxy + Dante (SOCKS5) + tools
+# Install OpenVPN + Tinyproxy + Dante (SOCKS5) + tools + Python for Dashboard
 RUN apt-get update \
    && apt-get install -y --no-install-recommends \
    openvpn \
@@ -18,7 +18,12 @@ RUN apt-get update \
    netcat-openbsd \
    logrotate \
    dos2unix \
+   python3 \
+   python3-pip \
    && rm -rf /var/lib/apt/lists/*
+
+# Install Flask for dashboard
+RUN pip3 install flask psutil
 
 # Copy config and startup script
 COPY tinyproxy.conf /etc/tinyproxy/tinyproxy.conf
@@ -26,6 +31,7 @@ COPY danted.conf /etc/danted.conf
 COPY logrotate.conf /etc/logrotate.d/vpn-proxy
 COPY entrypoint.sh /entrypoint.sh
 COPY scripts/ /scripts/
+COPY dashboard/ /dashboard/
 
 # Fix line endings for scripts and config files
 RUN dos2unix /entrypoint.sh /scripts/*.sh /etc/tinyproxy/tinyproxy.conf /etc/danted.conf /etc/logrotate.d/vpn-proxy \
@@ -40,7 +46,7 @@ RUN mkdir -p /var/log/vpn /var/cache/tinyproxy \
 # Mount folder with your .ovpn
 VOLUME ["/vpn"]
 
-# Expose proxy ports (HTTP + SOCKS5)
-EXPOSE 8888/tcp 1080/tcp
+# Expose proxy ports (HTTP + SOCKS5) + Dashboard
+EXPOSE 8888/tcp 1080/tcp 9090/tcp
 
 ENTRYPOINT ["/entrypoint.sh"]

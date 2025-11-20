@@ -127,9 +127,14 @@ danted -D -f /etc/danted.conf
 # 8. Start Watchdog
 /scripts/vpn-watchdog.sh &
 
+# 9. Start Dashboard
+echo "Starting Dashboard..."
+python3 /dashboard/app.py > /var/log/vpn/dashboard.log 2>&1 &
+
 echo "=== Setup Complete ==="
 echo "HTTP Proxy: Port 8888"
 echo "SOCKS5 Proxy: Port 1080"
+echo "Dashboard: http://localhost:9090"
 echo "Public IP via VPN:"
 curl --socks5-hostname localhost:1080 https://ifconfig.me --max-time 10 || echo "Check failed"
 
