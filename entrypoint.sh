@@ -107,8 +107,13 @@ iptables -A INPUT -i tun0 -m state --state ESTABLISHED,RELATED -j ACCEPT
 # STRICT MODE: Only allow UDP/TCP to specific ports on eth0
 iptables -A OUTPUT -o eth0 -p udp -m multiport --dports 1194,443,1195 -j ACCEPT
 iptables -A OUTPUT -o eth0 -p tcp -m multiport --dports 1194,443,1195 -j ACCEPT
-# Allow DNS on eth0 (if not tunneling DNS, but we are trying to tunnel DNS)
-# If we force DNS through tun0, we don't need it on eth0.
+iptables -A INPUT -i eth0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Allow DNS through VPN tunnel (port 53 UDP/TCP)
+iptables -A OUTPUT -o tun0 -p udp --dport 53 -j ACCEPT
+iptables -A OUTPUT -o tun0 -p tcp --dport 53 -j ACCEPT
+iptables -A INPUT -i tun0 -p udp --sport 53 -j ACCEPT
+iptables -A INPUT -i tun0 -p tcp --sport 53 -j ACCEPT
 
 # 7. Start Proxies
 echo "Starting Tinyproxy..."
