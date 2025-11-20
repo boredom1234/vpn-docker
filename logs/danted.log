@@ -1,0 +1,27 @@
+Nov 20 16:11:21 (1763655081.409098) danted[52]: info: Dante/server[1/1] v1.4.2 running
+Nov 20 16:11:21 (1763655081.410951) danted[60]: info: pass(1): tcp/accept [: 127.0.0.1.50364 127.0.0.1.1080
+Nov 20 16:11:41 (1763655101.438694) danted[61]: info: block(1): tcp/connect ]: 127.0.0.1.50364 127.0.0.1.1080: could not resolve hostname "ifconfig.me": Temporary failure in name resolution
+Nov 20 16:11:41 (1763655101.440742) danted[61]: info: block(1): tcp/accept ]: 127.0.0.1.50364 127.0.0.1.1080: request was not performed due to error: could not resolve hostname "ifconfig.me": Temporary failure in name resolution
+Nov 20 16:13:54 (1763655234.083637) danted[59]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.083627) danted[61]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.083728) danted[68]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.083791) danted[65]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.083756) danted[62]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.083884) danted[66]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.083969) danted[63]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.084023) danted[60]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.084148) danted[70]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.084223) danted[52]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.084234) danted[74]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.083993) danted[64]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.084228) danted[72]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.084388) danted[73]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.084404) danted[69]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.084509) danted[78]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.084557) danted[71]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.084612) danted[77]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.084655) danted[79]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.084640) danted[75]: info: sigterm(): exiting on signal 15
+Nov 20 16:13:54 (1763655234.084729) danted[76]: info: sigterm(): exiting on signal 15
+Nov 20 16:14:35 (1763655275.063848) danted[74]: info: Dante/server[1/1] v1.4.2 running
+Nov 20 16:14:35 (1763655275.066090) danted[82]: info: pass(1): tcp/accept [: 127.0.0.1.46676 127.0.0.1.1080

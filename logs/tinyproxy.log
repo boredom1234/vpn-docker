@@ -1,0 +1,370 @@
+DEBUG     Nov 20 15:34:02.229 [1]: sending stored logs
+NOTICE    Nov 20 15:34:02.234 [1]: Initializing tinyproxy ...
+NOTICE    Nov 20 15:34:02.237 [1]: Reloading config file
+NOTICE    Nov 20 15:34:02.241 [1]: Reloading config file finished
+DEBUG     Nov 20 15:34:02.246 [1]: done sending stored logs
+CONNECT   Nov 20 15:34:02.735 [1]: Connect (file descriptor 6): 127.0.0.1
+CONNECT   Nov 20 15:34:02.748 [1]: Request (file descriptor 6): CONNECT ipinfo.io:443 HTTP/1.1
+CONNECT   Nov 20 15:34:02.939 [1]: Established connection to host "ipinfo.io" using file descriptor 7.
+CONNECT   Nov 20 15:34:33.950 [1]: Connect (file descriptor 6): 127.0.0.1
+CONNECT   Nov 20 15:34:33.954 [1]: Request (file descriptor 6): CONNECT ipinfo.io:443 HTTP/1.1
+CONNECT   Nov 20 15:34:34.160 [1]: Established connection to host "ipinfo.io" using file descriptor 7.
+CONNECT   Nov 20 15:35:05.520 [1]: Connect (file descriptor 6): 127.0.0.1
+CONNECT   Nov 20 15:35:05.530 [1]: Request (file descriptor 6): CONNECT ipinfo.io:443 HTTP/1.1
+CONNECT   Nov 20 15:35:06.020 [1]: Established connection to host "ipinfo.io" using file descriptor 7.
+CONNECT   Nov 20 15:35:39.455 [1]: Connect (file descriptor 6): 127.0.0.1
+CONNECT   Nov 20 15:35:39.464 [1]: Request (file descriptor 6): CONNECT ipinfo.io:443 HTTP/1.1
+CONNECT   Nov 20 15:35:40.618 [1]: Established connection to host "ipinfo.io" using file descriptor 7.
+CONNECT   Nov 20 15:36:13.057 [1]: Connect (file descriptor 6): 127.0.0.1
+CONNECT   Nov 20 15:36:13.061 [1]: Request (file descriptor 6): CONNECT ipinfo.io:443 HTTP/1.1
+CONNECT   Nov 20 15:36:13.277 [1]: Established connection to host "ipinfo.io" using file descriptor 7.
+CONNECT   Nov 20 15:36:44.414 [1]: Connect (file descriptor 6): 127.0.0.1
+CONNECT   Nov 20 15:36:44.417 [1]: Request (file descriptor 6): CONNECT ipinfo.io:443 HTTP/1.1
+CONNECT   Nov 20 15:36:45.033 [1]: Established connection to host "ipinfo.io" using file descriptor 7.
+CONNECT   Nov 20 15:37:18.580 [1]: Connect (file descriptor 6): 127.0.0.1
+CONNECT   Nov 20 15:37:18.584 [1]: Request (file descriptor 6): CONNECT ipinfo.io:443 HTTP/1.1
+CONNECT   Nov 20 15:37:18.912 [1]: Established connection to host "ipinfo.io" using file descriptor 7.
+CONNECT   Nov 20 15:37:49.911 [1]: Connect (file descriptor 6): 127.0.0.1
+CONNECT   Nov 20 15:37:49.920 [1]: Request (file descriptor 6): CONNECT ipinfo.io:443 HTTP/1.1
+CONNECT   Nov 20 15:37:50.142 [1]: Established connection to host "ipinfo.io" using file descriptor 7.
+CONNECT   Nov 20 15:38:21.170 [1]: Connect (file descriptor 6): 127.0.0.1
+CONNECT   Nov 20 15:38:21.180 [1]: Request (file descriptor 6): CONNECT ipinfo.io:443 HTTP/1.1
+CONNECT   Nov 20 15:38:21.487 [1]: Established connection to host "ipinfo.io" using file descriptor 7.
+CONNECT   Nov 20 15:38:53.107 [1]: Connect (file descriptor 6): 127.0.0.1
+CONNECT   Nov 20 15:38:53.116 [1]: Request (file descriptor 6): CONNECT ipinfo.io:443 HTTP/1.1
+CONNECT   Nov 20 15:38:53.542 [1]: Established connection to host "ipinfo.io" using file descriptor 7.
+CONNECT   Nov 20 15:39:27.455 [1]: Connect (file descriptor 6): 127.0.0.1
+CONNECT   Nov 20 15:39:27.464 [1]: Request (file descriptor 6): CONNECT ipinfo.io:443 HTTP/1.1
+CONNECT   Nov 20 15:39:28.303 [1]: Established connection to host "ipinfo.io" using file descriptor 7.
+NOTICE    Nov 20 15:39:52.830 [1]: Shutting down.
+WARNING   Nov 20 15:39:52.842 [1]: Could not remove PID file "/var/run/tinyproxy/tinyproxy.pid": Permission denied.
+NOTICE    Nov 20 16:11:21.024 [50]: Initializing tinyproxy ...
+NOTICE    Nov 20 16:11:21.030 [50]: Reloading config file
+INFO      Nov 20 16:11:21.032 [50]: Adding Port [80] to the list allowed by CONNECT
+INFO      Nov 20 16:11:21.034 [50]: Adding Port [443] to the list allowed by CONNECT
+INFO      Nov 20 16:11:21.037 [50]: Adding Port [563] to the list allowed by CONNECT
+NOTICE    Nov 20 16:11:21.040 [50]: Reloading config file finished
+INFO      Nov 20 16:11:21.042 [50]: listen_sock called with addr = '(NULL)'
+INFO      Nov 20 16:11:21.046 [50]: trying to listen on host[0.0.0.0], family[2], socktype[1], proto[6]
+INFO      Nov 20 16:11:21.049 [50]: listening on fd [0]
+INFO      Nov 20 16:11:21.052 [50]: trying to listen on host[::], family[10], socktype[1], proto[6]
+INFO      Nov 20 16:11:21.054 [50]: listening on fd [1]
+INFO      Nov 20 16:11:21.057 [50]: Now running as group "nogroup".
+INFO      Nov 20 16:11:21.060 [50]: Now running as user "nobody".
+INFO      Nov 20 16:11:21.063 [50]: Setting the various signals.
+INFO      Nov 20 16:11:21.066 [50]: Starting main loop. Accepting connections.
+CONNECT   Nov 20 16:11:24.756 [50]: Connect (file descriptor 3): ::1
+NOTICE    Nov 20 16:11:24.766 [50]: Unauthorized connection from "::1".
+ERROR     Nov 20 16:11:24.768 [50]: Error reading readable client_fd 3
+WARNING   Nov 20 16:11:24.771 [50]: Could not retrieve request entity
+CONNECT   Nov 20 16:11:53.532 [50]: Connect (file descriptor 3): 172.18.0.1
+CONNECT   Nov 20 16:11:53.540 [50]: Request (file descriptor 3): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:11:53.542 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:11:53.546 [50]: opensock: opening connection to meet.google.com:443
+CONNECT   Nov 20 16:11:54.901 [50]: Connect (file descriptor 5): ::1
+NOTICE    Nov 20 16:11:54.904 [50]: Unauthorized connection from "::1".
+ERROR     Nov 20 16:11:54.908 [50]: Error reading readable client_fd 5
+WARNING   Nov 20 16:11:54.913 [50]: Could not retrieve request entity
+CONNECT   Nov 20 16:11:55.931 [50]: Connect (file descriptor 5): 172.18.0.1
+CONNECT   Nov 20 16:11:55.934 [50]: Request (file descriptor 5): CONNECT play.google.com:443 HTTP/1.1
+INFO      Nov 20 16:11:55.936 [50]: No upstream proxy for play.google.com
+INFO      Nov 20 16:11:55.939 [50]: opensock: opening connection to play.google.com:443
+CONNECT   Nov 20 16:11:56.478 [50]: Connect (file descriptor 7): 172.18.0.1
+CONNECT   Nov 20 16:11:56.482 [50]: Request (file descriptor 7): CONNECT www.google.com:443 HTTP/1.1
+INFO      Nov 20 16:11:56.485 [50]: No upstream proxy for www.google.com
+INFO      Nov 20 16:11:56.489 [50]: opensock: opening connection to www.google.com:443
+CONNECT   Nov 20 16:11:56.634 [50]: Connect (file descriptor 9): 172.18.0.1
+CONNECT   Nov 20 16:11:56.639 [50]: Request (file descriptor 9): CONNECT www.google.com:443 HTTP/1.1
+INFO      Nov 20 16:11:56.642 [50]: No upstream proxy for www.google.com
+INFO      Nov 20 16:11:56.644 [50]: opensock: opening connection to www.google.com:443
+CONNECT   Nov 20 16:11:56.809 [50]: Connect (file descriptor 11): 172.18.0.1
+CONNECT   Nov 20 16:11:56.812 [50]: Request (file descriptor 11): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:11:56.814 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:11:56.817 [50]: opensock: opening connection to meet.google.com:443
+CONNECT   Nov 20 16:11:56.885 [50]: Connect (file descriptor 13): 172.18.0.1
+CONNECT   Nov 20 16:11:56.892 [50]: Request (file descriptor 13): CONNECT www.google.com:443 HTTP/1.1
+INFO      Nov 20 16:11:56.895 [50]: No upstream proxy for www.google.com
+INFO      Nov 20 16:11:56.898 [50]: opensock: opening connection to www.google.com:443
+CONNECT   Nov 20 16:11:56.910 [50]: Connect (file descriptor 15): 172.18.0.1
+CONNECT   Nov 20 16:11:56.913 [50]: Request (file descriptor 15): CONNECT www.google.com:443 HTTP/1.1
+INFO      Nov 20 16:11:56.916 [50]: No upstream proxy for www.google.com
+INFO      Nov 20 16:11:56.918 [50]: opensock: opening connection to www.google.com:443
+CONNECT   Nov 20 16:11:57.467 [50]: Connect (file descriptor 17): 172.18.0.1
+CONNECT   Nov 20 16:11:57.477 [50]: Request (file descriptor 17): CONNECT www.google.com:443 HTTP/1.1
+INFO      Nov 20 16:11:57.480 [50]: No upstream proxy for www.google.com
+INFO      Nov 20 16:11:57.482 [50]: opensock: opening connection to www.google.com:443
+CONNECT   Nov 20 16:11:58.798 [50]: Connect (file descriptor 20): 172.18.0.1
+CONNECT   Nov 20 16:11:58.801 [50]: Request (file descriptor 20): CONNECT www.google.com:443 HTTP/1.1
+INFO      Nov 20 16:11:58.804 [50]: No upstream proxy for www.google.com
+INFO      Nov 20 16:11:58.807 [50]: opensock: opening connection to www.google.com:443
+CONNECT   Nov 20 16:11:58.837 [50]: Connect (file descriptor 22): 172.18.0.1
+CONNECT   Nov 20 16:11:58.840 [50]: Request (file descriptor 22): CONNECT optimizationguide-pa.googleapis.com:443 HTTP/1.1
+INFO      Nov 20 16:11:58.843 [50]: No upstream proxy for optimizationguide-pa.googleapis.com
+INFO      Nov 20 16:11:58.846 [50]: opensock: opening connection to optimizationguide-pa.googleapis.com:443
+CONNECT   Nov 20 16:11:58.855 [50]: Connect (file descriptor 24): 172.18.0.1
+CONNECT   Nov 20 16:11:58.858 [50]: Request (file descriptor 24): CONNECT www.ip2location.io:443 HTTP/1.1
+INFO      Nov 20 16:11:58.860 [50]: No upstream proxy for www.ip2location.io
+INFO      Nov 20 16:11:58.863 [50]: opensock: opening connection to www.ip2location.io:443
+CONNECT   Nov 20 16:12:04.822 [50]: Connect (file descriptor 36): 172.18.0.1
+CONNECT   Nov 20 16:12:04.859 [50]: Request (file descriptor 36): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:04.863 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:04.865 [50]: opensock: opening connection to meet.google.com:443
+CONNECT   Nov 20 16:12:06.198 [50]: Connect (file descriptor 38): 172.18.0.1
+CONNECT   Nov 20 16:12:06.211 [50]: Request (file descriptor 38): CONNECT play.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:06.214 [50]: No upstream proxy for play.google.com
+INFO      Nov 20 16:12:06.216 [50]: opensock: opening connection to play.google.com:443
+CONNECT   Nov 20 16:12:08.192 [50]: Connect (file descriptor 40): 172.18.0.1
+CONNECT   Nov 20 16:12:08.203 [50]: Request (file descriptor 40): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:08.205 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:08.207 [50]: opensock: opening connection to meet.google.com:443
+CONNECT   Nov 20 16:12:09.253 [50]: Connect (file descriptor 42): 172.18.0.1
+CONNECT   Nov 20 16:12:09.268 [50]: Request (file descriptor 42): CONNECT www.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:09.270 [50]: No upstream proxy for www.google.com
+INFO      Nov 20 16:12:09.272 [50]: opensock: opening connection to www.google.com:443
+CONNECT   Nov 20 16:12:10.953 [50]: Connect (file descriptor 45): 172.18.0.1
+CONNECT   Nov 20 16:12:10.983 [50]: Request (file descriptor 45): CONNECT clients4.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:10.986 [50]: No upstream proxy for clients4.google.com
+INFO      Nov 20 16:12:10.989 [50]: opensock: opening connection to clients4.google.com:443
+CONNECT   Nov 20 16:12:12.412 [50]: Connect (file descriptor 48): 172.18.0.1
+CONNECT   Nov 20 16:12:12.416 [50]: Request (file descriptor 48): CONNECT hub.docker.com:443 HTTP/1.1
+INFO      Nov 20 16:12:12.418 [50]: No upstream proxy for hub.docker.com
+INFO      Nov 20 16:12:12.420 [50]: opensock: opening connection to hub.docker.com:443
+ERROR     Nov 20 16:12:13.567 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:14.521 [50]: Connect (file descriptor 4): 172.18.0.1
+CONNECT   Nov 20 16:12:14.533 [50]: Request (file descriptor 4): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:14.536 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:14.540 [50]: opensock: opening connection to meet.google.com:443
+CONNECT   Nov 20 16:12:14.836 [50]: Connect (file descriptor 51): 172.18.0.1
+CONNECT   Nov 20 16:12:14.846 [50]: Request (file descriptor 51): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:14.849 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:14.851 [50]: opensock: opening connection to meet.google.com:443
+CONNECT   Nov 20 16:12:14.930 [50]: Connect (file descriptor 53): 172.18.0.1
+CONNECT   Nov 20 16:12:14.934 [50]: Request (file descriptor 53): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:14.937 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:14.940 [50]: opensock: opening connection to meet.google.com:443
+ERROR     Nov 20 16:12:15.958 [50]: opensock: Could not retrieve address info for play.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:16.511 [50]: opensock: Could not retrieve address info for www.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:16.519 [50]: Connect (file descriptor 6): 172.18.0.1
+CONNECT   Nov 20 16:12:16.522 [50]: Request (file descriptor 6): CONNECT www.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:16.526 [50]: No upstream proxy for www.google.com
+INFO      Nov 20 16:12:16.528 [50]: opensock: opening connection to www.google.com:443
+ERROR     Nov 20 16:12:16.666 [50]: opensock: Could not retrieve address info for www.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:16.840 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:16.919 [50]: opensock: Could not retrieve address info for www.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:16.939 [50]: opensock: Could not retrieve address info for www.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:17.129 [50]: Connect (file descriptor 8): 172.18.0.1
+CONNECT   Nov 20 16:12:17.131 [50]: Request (file descriptor 8): CONNECT ogads-pa.clients6.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:17.134 [50]: No upstream proxy for ogads-pa.clients6.google.com
+INFO      Nov 20 16:12:17.139 [50]: opensock: opening connection to ogads-pa.clients6.google.com:443
+ERROR     Nov 20 16:12:17.504 [50]: opensock: Could not retrieve address info for www.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:18.141 [50]: Connect (file descriptor 11): 172.18.0.1
+CONNECT   Nov 20 16:12:18.142 [50]: Connect (file descriptor 12): 172.18.0.1
+CONNECT   Nov 20 16:12:18.144 [50]: Request (file descriptor 11): CONNECT play.google.com:443 HTTP/1.1
+CONNECT   Nov 20 16:12:18.147 [50]: Request (file descriptor 12): CONNECT www.ip2location.io:443 HTTP/1.1
+INFO      Nov 20 16:12:18.150 [50]: No upstream proxy for play.google.com
+INFO      Nov 20 16:12:18.156 [50]: No upstream proxy for www.ip2location.io
+INFO      Nov 20 16:12:18.160 [50]: opensock: opening connection to www.ip2location.io:443
+INFO      Nov 20 16:12:18.164 [50]: opensock: opening connection to play.google.com:443
+CONNECT   Nov 20 16:12:18.170 [50]: Connect (file descriptor 15): 172.18.0.1
+CONNECT   Nov 20 16:12:18.173 [50]: Request (file descriptor 15): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:18.176 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:18.178 [50]: opensock: opening connection to meet.google.com:443
+ERROR     Nov 20 16:12:18.830 [50]: opensock: Could not retrieve address info for www.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:18.866 [50]: opensock: Could not retrieve address info for optimizationguide-pa.googleapis.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:18.885 [50]: opensock: Could not retrieve address info for www.ip2location.io:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:19.985 [50]: Connect (file descriptor 21): 172.18.0.1
+CONNECT   Nov 20 16:12:19.996 [50]: Request (file descriptor 21): CONNECT optimizationguide-pa.googleapis.com:443 HTTP/1.1
+CONNECT   Nov 20 16:12:19.990 [50]: Connect (file descriptor 22): 172.18.0.1
+CONNECT   Nov 20 16:12:20.002 [50]: Request (file descriptor 22): CONNECT www.ip2location.io:443 HTTP/1.1
+INFO      Nov 20 16:12:20.006 [50]: No upstream proxy for www.ip2location.io
+INFO      Nov 20 16:12:20.009 [50]: opensock: opening connection to www.ip2location.io:443
+INFO      Nov 20 16:12:19.999 [50]: No upstream proxy for optimizationguide-pa.googleapis.com
+INFO      Nov 20 16:12:20.015 [50]: opensock: opening connection to optimizationguide-pa.googleapis.com:443
+CONNECT   Nov 20 16:12:22.796 [50]: Connect (file descriptor 27): 172.18.0.1
+CONNECT   Nov 20 16:12:22.799 [50]: Request (file descriptor 27): CONNECT www.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:22.802 [50]: No upstream proxy for www.google.com
+INFO      Nov 20 16:12:22.805 [50]: opensock: opening connection to www.google.com:443
+CONNECT   Nov 20 16:12:22.982 [50]: Connect (file descriptor 29): 172.18.0.1
+CONNECT   Nov 20 16:12:22.986 [50]: Request (file descriptor 29): CONNECT www.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:22.989 [50]: No upstream proxy for www.google.com
+INFO      Nov 20 16:12:22.991 [50]: opensock: opening connection to www.google.com:443
+CONNECT   Nov 20 16:12:23.122 [50]: Connect (file descriptor 31): 172.18.0.1
+CONNECT   Nov 20 16:12:23.128 [50]: Request (file descriptor 31): CONNECT www.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:23.131 [50]: No upstream proxy for www.google.com
+INFO      Nov 20 16:12:23.133 [50]: opensock: opening connection to www.google.com:443
+CONNECT   Nov 20 16:12:23.227 [50]: Connect (file descriptor 55): 172.18.0.1
+CONNECT   Nov 20 16:12:23.231 [50]: Request (file descriptor 55): CONNECT www.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:23.234 [50]: No upstream proxy for www.google.com
+INFO      Nov 20 16:12:23.236 [50]: opensock: opening connection to www.google.com:443
+CONNECT   Nov 20 16:12:23.708 [50]: Connect (file descriptor 57): 172.18.0.1
+CONNECT   Nov 20 16:12:23.711 [50]: Request (file descriptor 57): CONNECT google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:23.715 [50]: No upstream proxy for google.com
+INFO      Nov 20 16:12:23.717 [50]: opensock: opening connection to google.com:443
+CONNECT   Nov 20 16:12:23.999 [50]: Connect (file descriptor 59): 172.18.0.1
+CONNECT   Nov 20 16:12:24.009 [50]: Request (file descriptor 59): CONNECT optimizationguide-pa.googleapis.com:443 HTTP/1.1
+INFO      Nov 20 16:12:24.011 [50]: No upstream proxy for optimizationguide-pa.googleapis.com
+INFO      Nov 20 16:12:24.014 [50]: opensock: opening connection to optimizationguide-pa.googleapis.com:443
+ERROR     Nov 20 16:12:24.888 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:25.014 [50]: Connect (file descriptor 36): ::1
+NOTICE    Nov 20 16:12:25.025 [50]: Unauthorized connection from "::1".
+ERROR     Nov 20 16:12:25.029 [50]: Error reading readable client_fd 36
+WARNING   Nov 20 16:12:25.031 [50]: Could not retrieve request entity
+CONNECT   Nov 20 16:12:25.508 [50]: Connect (file descriptor 36): 172.18.0.1
+CONNECT   Nov 20 16:12:25.518 [50]: Request (file descriptor 36): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:25.520 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:25.523 [50]: opensock: opening connection to meet.google.com:443
+ERROR     Nov 20 16:12:26.236 [50]: opensock: Could not retrieve address info for play.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:27.044 [50]: Connect (file descriptor 38): 172.18.0.1
+CONNECT   Nov 20 16:12:27.057 [50]: Request (file descriptor 38): CONNECT play.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:27.060 [50]: No upstream proxy for play.google.com
+INFO      Nov 20 16:12:27.063 [50]: opensock: opening connection to play.google.com:443
+CONNECT   Nov 20 16:12:27.551 [50]: Connect (file descriptor 47): 172.18.0.1
+CONNECT   Nov 20 16:12:27.554 [50]: Request (file descriptor 47): CONNECT www.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:27.557 [50]: No upstream proxy for www.google.com
+INFO      Nov 20 16:12:27.560 [50]: opensock: opening connection to www.google.com:443
+ERROR     Nov 20 16:12:28.228 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:28.251 [50]: Connect (file descriptor 40): 172.18.0.1
+CONNECT   Nov 20 16:12:28.255 [50]: Request (file descriptor 40): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:28.259 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:28.265 [50]: opensock: opening connection to meet.google.com:443
+CONNECT   Nov 20 16:12:28.579 [50]: Connect (file descriptor 66): 172.18.0.1
+CONNECT   Nov 20 16:12:28.584 [50]: Request (file descriptor 66): CONNECT google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:28.587 [50]: No upstream proxy for google.com
+INFO      Nov 20 16:12:28.590 [50]: opensock: opening connection to google.com:443
+ERROR     Nov 20 16:12:29.293 [50]: opensock: Could not retrieve address info for www.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:31.010 [50]: opensock: Could not retrieve address info for clients4.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:32.445 [50]: opensock: Could not retrieve address info for hub.docker.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:33.567 [50]: Connect (file descriptor 43): 172.18.0.1
+CONNECT   Nov 20 16:12:33.576 [50]: Request (file descriptor 43): CONNECT clients4.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:33.581 [50]: No upstream proxy for clients4.google.com
+INFO      Nov 20 16:12:33.584 [50]: opensock: opening connection to clients4.google.com:443
+CONNECT   Nov 20 16:12:33.715 [50]: Connect (file descriptor 48): 172.18.0.1
+CONNECT   Nov 20 16:12:33.725 [50]: Request (file descriptor 48): CONNECT hub.docker.com:443 HTTP/1.1
+INFO      Nov 20 16:12:33.728 [50]: No upstream proxy for hub.docker.com
+INFO      Nov 20 16:12:33.730 [50]: opensock: opening connection to hub.docker.com:443
+ERROR     Nov 20 16:12:34.566 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:34.580 [50]: Connect (file descriptor 4): 172.18.0.1
+CONNECT   Nov 20 16:12:34.582 [50]: Request (file descriptor 4): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:34.585 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:34.587 [50]: opensock: opening connection to meet.google.com:443
+ERROR     Nov 20 16:12:34.876 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:34.935 [50]: Connect (file descriptor 18): 172.18.0.1
+CONNECT   Nov 20 16:12:34.939 [50]: Request (file descriptor 18): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:34.942 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:34.945 [50]: opensock: opening connection to meet.google.com:443
+ERROR     Nov 20 16:12:34.966 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:35.987 [50]: Connect (file descriptor 20): 172.18.0.1
+CONNECT   Nov 20 16:12:35.998 [50]: Request (file descriptor 20): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:36.003 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:36.007 [50]: opensock: opening connection to meet.google.com:443
+ERROR     Nov 20 16:12:36.552 [50]: opensock: Could not retrieve address info for www.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:37.164 [50]: opensock: Could not retrieve address info for ogads-pa.clients6.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:38.182 [50]: opensock: Could not retrieve address info for www.ip2location.io:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:38.186 [50]: opensock: Could not retrieve address info for play.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:38.204 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:38.216 [50]: Connect (file descriptor 6): 172.18.0.1
+CONNECT   Nov 20 16:12:38.219 [50]: Request (file descriptor 6): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:38.222 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:38.226 [50]: opensock: opening connection to meet.google.com:443
+ERROR     Nov 20 16:12:40.032 [50]: opensock: Could not retrieve address info for www.ip2location.io:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:40.035 [50]: opensock: Could not retrieve address info for optimizationguide-pa.googleapis.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:42.827 [50]: opensock: Could not retrieve address info for www.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:43.021 [50]: Connect (file descriptor 14): 172.18.0.1
+CONNECT   Nov 20 16:12:43.025 [50]: Request (file descriptor 14): CONNECT ogads-pa.clients6.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:43.028 [50]: No upstream proxy for ogads-pa.clients6.google.com
+INFO      Nov 20 16:12:43.034 [50]: opensock: opening connection to ogads-pa.clients6.google.com:443
+ERROR     Nov 20 16:12:43.043 [50]: opensock: Could not retrieve address info for www.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:43.154 [50]: opensock: Could not retrieve address info for www.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:43.253 [50]: opensock: Could not retrieve address info for www.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:43.738 [50]: opensock: Could not retrieve address info for google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:43.873 [50]: Connect (file descriptor 21): 172.18.0.1
+CONNECT   Nov 20 16:12:43.878 [50]: Request (file descriptor 21): CONNECT play.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:43.883 [50]: No upstream proxy for play.google.com
+INFO      Nov 20 16:12:43.886 [50]: opensock: opening connection to play.google.com:443
+ERROR     Nov 20 16:12:44.035 [50]: opensock: Could not retrieve address info for optimizationguide-pa.googleapis.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:44.865 [50]: Connect (file descriptor 23): 172.18.0.1
+CONNECT   Nov 20 16:12:44.869 [50]: Request (file descriptor 23): CONNECT optimizationguide-pa.googleapis.com:443 HTTP/1.1
+CONNECT   Nov 20 16:12:44.873 [50]: Connect (file descriptor 24): 172.18.0.1
+INFO      Nov 20 16:12:44.873 [50]: No upstream proxy for optimizationguide-pa.googleapis.com
+INFO      Nov 20 16:12:44.880 [50]: opensock: opening connection to optimizationguide-pa.googleapis.com:443
+CONNECT   Nov 20 16:12:44.877 [50]: Request (file descriptor 24): CONNECT google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:44.888 [50]: No upstream proxy for google.com
+INFO      Nov 20 16:12:44.891 [50]: opensock: opening connection to google.com:443
+ERROR     Nov 20 16:12:45.544 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:45.554 [50]: Connect (file descriptor 3): 172.18.0.1
+CONNECT   Nov 20 16:12:45.557 [50]: Request (file descriptor 3): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:45.559 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:45.561 [50]: opensock: opening connection to meet.google.com:443
+ERROR     Nov 20 16:12:47.086 [50]: opensock: Could not retrieve address info for play.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:47.584 [50]: opensock: Could not retrieve address info for www.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:47.844 [50]: Connect (file descriptor 5): 172.18.0.1
+CONNECT   Nov 20 16:12:47.853 [50]: Request (file descriptor 5): CONNECT play.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:47.856 [50]: No upstream proxy for play.google.com
+INFO      Nov 20 16:12:47.859 [50]: opensock: opening connection to play.google.com:443
+ERROR     Nov 20 16:12:48.286 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:48.297 [50]: Connect (file descriptor 29): 172.18.0.1
+CONNECT   Nov 20 16:12:48.301 [50]: Request (file descriptor 29): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:48.304 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:48.307 [50]: opensock: opening connection to meet.google.com:443
+ERROR     Nov 20 16:12:48.600 [50]: opensock: Could not retrieve address info for google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:53.601 [50]: opensock: Could not retrieve address info for clients4.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:53.750 [50]: opensock: Could not retrieve address info for hub.docker.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:12:54.609 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:54.627 [50]: Connect (file descriptor 4): 172.18.0.1
+CONNECT   Nov 20 16:12:54.632 [50]: Request (file descriptor 4): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:54.635 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:54.638 [50]: opensock: opening connection to meet.google.com:443
+ERROR     Nov 20 16:12:54.966 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:54.978 [50]: Connect (file descriptor 9): 172.18.0.1
+CONNECT   Nov 20 16:12:54.981 [50]: Request (file descriptor 9): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:54.983 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:54.986 [50]: opensock: opening connection to meet.google.com:443
+CONNECT   Nov 20 16:12:55.155 [50]: Connect (file descriptor 12): ::1
+NOTICE    Nov 20 16:12:55.160 [50]: Unauthorized connection from "::1".
+ERROR     Nov 20 16:12:55.163 [50]: Error reading readable client_fd 12
+WARNING   Nov 20 16:12:55.166 [50]: Could not retrieve request entity
+ERROR     Nov 20 16:12:56.028 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:56.042 [50]: Connect (file descriptor 12): 172.18.0.1
+CONNECT   Nov 20 16:12:56.046 [50]: Request (file descriptor 12): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:56.049 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:56.052 [50]: opensock: opening connection to meet.google.com:443
+ERROR     Nov 20 16:12:58.247 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:12:58.263 [50]: Connect (file descriptor 6): 172.18.0.1
+CONNECT   Nov 20 16:12:58.266 [50]: Request (file descriptor 6): CONNECT meet.google.com:443 HTTP/1.1
+INFO      Nov 20 16:12:58.268 [50]: No upstream proxy for meet.google.com
+INFO      Nov 20 16:12:58.271 [50]: opensock: opening connection to meet.google.com:443
+ERROR     Nov 20 16:13:03.062 [50]: opensock: Could not retrieve address info for ogads-pa.clients6.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:13:03.911 [50]: opensock: Could not retrieve address info for play.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:13:04.908 [50]: opensock: Could not retrieve address info for optimizationguide-pa.googleapis.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:13:04.918 [50]: opensock: Could not retrieve address info for google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:13:05.586 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:13:07.884 [50]: opensock: Could not retrieve address info for play.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:13:08.332 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:13:14.660 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:13:15.007 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:13:16.075 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+ERROR     Nov 20 16:13:18.294 [50]: opensock: Could not retrieve address info for meet.google.com:443: Temporary failure in name resolution
+CONNECT   Nov 20 16:13:25.275 [50]: Connect (file descriptor 3): ::1
+NOTICE    Nov 20 16:13:25.284 [50]: Unauthorized connection from "::1".
+ERROR     Nov 20 16:13:25.288 [50]: Error reading readable client_fd 3
+WARNING   Nov 20 16:13:25.291 [50]: Could not retrieve request entity
+NOTICE    Nov 20 16:13:54.083 [50]: Shutting down.
+NOTICE    Nov 20 16:14:34.354 [72]: Initializing tinyproxy ...
+NOTICE    Nov 20 16:14:34.358 [72]: Reloading config file
+INFO      Nov 20 16:14:34.360 [72]: Adding Port [80] to the list allowed by CONNECT
+INFO      Nov 20 16:14:34.363 [72]: Adding Port [443] to the list allowed by CONNECT
+INFO      Nov 20 16:14:34.365 [72]: Adding Port [563] to the list allowed by CONNECT
+NOTICE    Nov 20 16:14:34.367 [72]: Reloading config file finished
+INFO      Nov 20 16:14:34.368 [72]: listen_sock called with addr = '(NULL)'
+INFO      Nov 20 16:14:34.370 [72]: trying to listen on host[0.0.0.0], family[2], socktype[1], proto[6]
+INFO      Nov 20 16:14:34.372 [72]: listening on fd [0]
+INFO      Nov 20 16:14:34.375 [72]: trying to listen on host[::], family[10], socktype[1], proto[6]
+INFO      Nov 20 16:14:34.380 [72]: listening on fd [1]
+INFO      Nov 20 16:14:34.385 [72]: Now running as group "nogroup".
+INFO      Nov 20 16:14:34.389 [72]: Now running as user "nobody".
+INFO      Nov 20 16:14:34.395 [72]: Setting the various signals.
+INFO      Nov 20 16:14:34.397 [72]: Starting main loop. Accepting connections.
+CONNECT   Nov 20 16:14:35.968 [72]: Connect (file descriptor 3): ::1
+NOTICE    Nov 20 16:14:35.974 [72]: Unauthorized connection from "::1".
+ERROR     Nov 20 16:14:35.978 [72]: Error reading readable client_fd 3
+WARNING   Nov 20 16:14:35.980 [72]: Could not retrieve request entity

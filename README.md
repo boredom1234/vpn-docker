@@ -1,15 +1,18 @@
 # VPN Docker Proxy
 
-A containerized solution that combines OpenVPN client connectivity with an HTTP proxy server, allowing you to route traffic through a VPN connection via a simple proxy interface.
+A robust, containerized solution that combines OpenVPN client connectivity with HTTP and SOCKS5 proxy servers. It routes all traffic through a VPN connection with enterprise-grade security features including a kill switch and DNS leak prevention.
 
 ## Overview
 
 This project creates a Docker container that:
 
 - Connects to an OpenVPN server using your `.ovpn` configuration file
-- Runs a Tinyproxy HTTP proxy server on port 8888
+- Runs a **Tinyproxy** HTTP proxy server on port 8888
+- Runs a **Dante** SOCKS5 proxy server on port 1080
 - Routes all proxy traffic through the established VPN tunnel
-- Provides network isolation and security for your browsing
+- **Kill Switch**: Blocks all non-VPN traffic if the connection drops
+- **DNS Leak Protection**: Forces DNS queries through the VPN
+- **Health Monitoring**: Auto-restarts if components fail
 
 ## Architecture
 
@@ -18,30 +21,37 @@ This project creates a Docker container that:
 │   Your Device   │───▶ │  Docker Container│───▶│   VPN Server    │
 │                 │      │                  │    │                 │
 │ HTTP Proxy      │      │ OpenVPN Client + │    │ Internet Access │
-│ (Port 8888)     │      │ Tinyproxy Server │    │                 │
+│ (Port 8888)     │      │ Tinyproxy +      │    │                 │
+│ SOCKS5 Proxy    │      │ Dante Server     │    │                 │
+│ (Port 1080)     │      │                  │    │                 │
 └─────────────────┘      └──────────────────┘    └─────────────────┘
 ```
 
 ## Features
 
-- **VPN Integration**: Automatically connects to your OpenVPN server
-- **HTTP Proxy**: Provides HTTP/HTTPS proxy on port 8888
-- **Network Security**: All traffic routed through VPN tunnel
-- **Container Isolation**: Runs in isolated Docker environment
-- **Auto-restart**: Container restarts automatically unless stopped
-- **Health Monitoring**: Built-in connection verification and logging
+- **Dual Proxy Support**: HTTP/HTTPS (8888) and SOCKS5 (1080)
+- **Security First**:
+  - **Kill Switch**: Firewall rules prevent traffic leakage if VPN drops
+  - **DNS Leak Prevention**: Custom DNS configuration
+  - **Isolated**: Runs in a secure Docker container
+- **Reliability**:
+  - **Health Checks**: Docker native health monitoring
+  - **Watchdog Script**: Monitors VPN connection internally
+  - **Auto-Recovery**: Services restart on failure
+- **Observability**:
+  - **Structured Logging**: Logs to `./logs` on host
+  - **Traffic Analysis**: Built-in script to analyze usage
 
 ## Prerequisites
 
 - Docker and Docker Compose installed
 - A valid OpenVPN configuration file (`.ovpn`)
-- VPN service credentials (if required by your `.ovpn` file)
 
 ## Quick Start
 
 ### 1. Setup Configuration
 
-Place your OpenVPN configuration file in the `openvpn/` directory:
+Place your OpenVPN configuration file in the `openvpn/` directory. You can name it `client.ovpn` or specify the name in `docker-compose.yml`.
 
 ```bash
 cp your-vpn-config.ovpn openvpn/client.ovpn
@@ -50,128 +60,76 @@ cp your-vpn-config.ovpn openvpn/client.ovpn
 ### 2. Start the Container
 
 ```bash
-docker-compose up -d
+docker-compose up -d --build
 ```
 
 ### 3. Configure Your Applications
 
-Set your applications to use the HTTP proxy:
+**HTTP Proxy:**
 
-- **Proxy Host**: `localhost` (or your Docker host IP)
-- **Proxy Port**: `8888`
-- **Protocol**: HTTP
+- Host: `localhost`
+- Port: `8888`
 
-## Project Structure
+**SOCKS5 Proxy:**
 
-```
-vpn-docker/
-├── docker-compose.yml    # Container orchestration
-├── Dockerfile           # Container build instructions
-├── entrypoint.sh        # Startup script
-├── tinyproxy.conf       # Proxy server configuration
-├── openvpn/            # OpenVPN configuration directory
-│   └── client.ovpn     # Your VPN configuration file
-└── scripts/            # Additional scripts (if needed)
-```
+- Host: `localhost`
+- Port: `1080`
 
-## Configuration Files
-
-### Docker Compose (`docker-compose.yml`)
-
-- Builds the container with necessary privileges (`NET_ADMIN`)
-- Mounts TUN device for VPN connectivity
-- Exposes proxy port 8888
-- Mounts OpenVPN config directory
-
-### Dockerfile
-
-- Based on Ubuntu 22.04
-- Installs OpenVPN, Tinyproxy, and networking tools
-- Configures container environment
-
-### Entrypoint Script (`entrypoint.sh`)
-
-- Validates OpenVPN configuration presence
-- Starts OpenVPN client in daemon mode
-- Waits for VPN tunnel establishment
-- Starts Tinyproxy server
-
-### Tinyproxy Configuration (`tinyproxy.conf`)
-
-- Listens on port 8888
-- Allows connections from Docker networks
-- Configured for HTTP/HTTPS traffic
-
-## Usage Examples
-
-### Browser Configuration
-
-Configure your browser to use `localhost:8888` as HTTP proxy.
-
-### Command Line Tools
-
-```bash
-# Using curl
-curl --proxy http://localhost:8888 https://ipinfo.io
-
-# Using wget
-wget --proxy=on --http-proxy=localhost:8888 https://ipinfo.io
-```
+## Configuration
 
 ### Environment Variables
 
+You can configure the container via `docker-compose.yml`:
+
+| Variable           | Default           | Description                         |
+| ------------------ | ----------------- | ----------------------------------- |
+| `OVPN_FILE`        | `client.ovpn`     | Name of the config file in `/vpn`   |
+| `HTTP_PROXY_PORT`  | `8888`            | Port for HTTP proxy                 |
+| `SOCKS_PROXY_PORT` | `1080`            | Port for SOCKS5 proxy               |
+| `PROXY_USER`       | -                 | Username for Basic Auth (Tinyproxy) |
+| `PROXY_PASS`       | -                 | Password for Basic Auth (Tinyproxy) |
+| `DNS_SERVERS`      | `8.8.8.8 1.1.1.1` | DNS servers to use                  |
+
+### Authentication
+
+To enable Basic Authentication for the HTTP proxy, set `PROXY_USER` and `PROXY_PASS` in `docker-compose.yml`.
+
+## Monitoring & Troubleshooting
+
+### Check Status
+
 ```bash
-export http_proxy=http://localhost:8888
-export https_proxy=http://localhost:8888
+docker-compose ps
+# Look for "healthy" status
 ```
 
-## Monitoring and Troubleshooting
+### View Logs
 
-### View Container Logs
+Logs are persisted to the `./logs` directory on your host:
+
+- `logs/openvpn.log`: VPN connection logs
+- `logs/tinyproxy.log`: HTTP proxy access logs
+- `logs/danted.log`: SOCKS5 proxy logs
+
+### Analyze Traffic
+
+Run the built-in analyzer script:
 
 ```bash
-docker-compose logs -f vpn-proxy
+docker exec vpn-proxy /scripts/request-analyzer.sh
 ```
 
-### Check VPN Connection
+### Test Connection
 
 ```bash
-docker exec vpn-proxy ip addr show tun0
-docker exec vpn-proxy ip route
-```
-
-### Test Proxy Connection
-
-```bash
+# Test HTTP Proxy
 curl --proxy http://localhost:8888 https://ipinfo.io
+
+# Test SOCKS5 Proxy
+curl --socks5-hostname localhost:1080 https://ipinfo.io
 ```
 
-### Common Issues
+## Security Notes
 
-1. **OpenVPN config not found**: Ensure `client.ovpn` exists in `openvpn/` directory
-2. **Permission denied**: Container needs `NET_ADMIN` capability and TUN device access
-3. **Connection timeout**: Check your VPN credentials and server availability
-4. **Proxy not responding**: Verify container is running and port 8888 is accessible
-
-## Security Considerations
-
-- The container runs with elevated privileges (`NET_ADMIN`) for VPN functionality
-- Proxy access is restricted to Docker networks and localhost
-- All traffic is encrypted through the VPN tunnel
-- Consider using Docker secrets for sensitive VPN credentials
-
-## Customization
-
-### Changing Proxy Port
-
-1. Modify `Port` in `tinyproxy.conf`
-2. Update port mapping in `docker-compose.yml`
-3. Rebuild container: `docker-compose up --build -d`
-
-### Adding Authentication
-
-Edit `tinyproxy.conf` to add basic authentication or IP restrictions.
-
-### Multiple VPN Configs
-
-Create multiple compose files or modify the existing one to support different VPN configurations.
+- The container requires `NET_ADMIN` capability to manage network interfaces and iptables.
+- The Kill Switch uses `iptables` to drop all outgoing traffic that doesn't go through the `tun0` interface (except for the initial VPN connection).

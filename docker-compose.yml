@@ -8,6 +8,19 @@ services:
       - /dev/net/tun:/dev/net/tun
     volumes:
       - ./openvpn:/vpn:ro
+      - ./logs:/var/log/vpn
     ports:
-      - "8888:8888"
+      - "${HTTP_PROXY_PORT:-8888}:8888"
+      - "${SOCKS_PROXY_PORT:-1080}:1080"
+    environment:
+      - OVPN_FILE=${OVPN_FILE:-client.ovpn}
+      - PROXY_USER=${PROXY_USER}
+      - PROXY_PASS=${PROXY_PASS}
+      - DNS_SERVERS=${DNS_SERVERS:-8.8.8.8 1.1.1.1}
+    healthcheck:
+      test: ["CMD", "sh", "-c", "pgrep openvpn && nc -z localhost 8888"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     restart: unless-stopped
