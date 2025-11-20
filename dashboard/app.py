@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import subprocess
 import os
 import time
@@ -75,9 +75,20 @@ def status():
 
 @app.route("/api/logs")
 def logs():
+    log_type = request.args.get("type", "openvpn")
+    log_file = OVPN_LOG
+    
+    if log_type == "tinyproxy":
+        log_file = os.path.join(LOG_DIR, "tinyproxy.log")
+    elif log_type == "dante":
+        log_file = os.path.join(LOG_DIR, "danted.log")
+
     try:
-        # Read last 50 lines of openvpn log
-        cmd = f"tail -n 50 {OVPN_LOG}"
+        if not os.path.exists(log_file):
+            return jsonify({"logs": f"Log file not found: {log_file}"})
+            
+        # Read last 100 lines
+        cmd = f"tail -n 100 {log_file}"
         output = subprocess.check_output(cmd, shell=True, text=True)
         return jsonify({"logs": output})
     except Exception as e:

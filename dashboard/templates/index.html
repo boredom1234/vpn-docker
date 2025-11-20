@@ -3,104 +3,247 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VPN Proxy Dashboard</title>
+    <title>VPN Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+            colors: {
+              background: "#09090b",
+              surface: "#18181b",
+              surfaceHighlight: "#27272a",
+            },
+          },
+        },
+      };
+    </script>
     <style>
-      .glass {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
       body {
-        background-color: #0f172a;
-        color: #e2e8f0;
+        background-color: #09090b;
+        color: #e4e4e7;
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #27272a;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #3f3f46;
+      }
+
+      .card {
+        background-color: rgba(24, 24, 27, 0.6);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.3s ease;
+      }
+
+      .card:hover {
+        border-color: rgba(255, 255, 255, 0.12);
       }
     </style>
   </head>
-  <body class="min-h-screen p-6">
-    <div class="max-w-6xl mx-auto space-y-6">
+  <body
+    class="min-h-screen p-6 md:p-10 font-sans antialiased selection:bg-blue-500/30"
+  >
+    <div class="max-w-7xl mx-auto space-y-8">
       <!-- Header -->
-      <div class="flex justify-between items-center mb-8">
+      <div
+        class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4"
+      >
         <div>
-          <h1 class="text-2xl font-bold text-blue-400">VPN Proxy Node</h1>
-          <p class="text-slate-400 text-sm">System Status Dashboard</p>
+          <h1 class="text-3xl font-light tracking-tight text-white">
+            VPN Node
+          </h1>
+          <div class="flex items-center gap-2 mt-1.5">
+            <span class="relative flex h-2 w-2">
+              <span
+                id="status-ping"
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 hidden"
+              ></span>
+              <span
+                id="status-dot"
+                class="relative inline-flex rounded-full h-2 w-2 bg-zinc-600"
+              ></span>
+            </span>
+            <p id="status-text" class="text-zinc-400 text-sm font-medium">
+              Initializing...
+            </p>
+          </div>
         </div>
-        <div class="flex gap-3">
-          <button
-            onclick="restartVPN()"
-            class="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg border border-red-500/50 transition-all text-sm font-medium"
-          >
-            Restart VPN
-          </button>
-        </div>
+        <button
+          onclick="restartVPN()"
+          class="group relative px-5 py-2.5 bg-red-500/5 hover:bg-red-500/10 text-red-400 rounded-lg border border-red-500/20 hover:border-red-500/30 transition-all duration-300 text-sm font-medium overflow-hidden"
+        >
+          <span class="relative z-10 flex items-center gap-2">
+            <svg
+              class="w-4 h-4 transition-transform group-hover:rotate-180"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              ></path>
+            </svg>
+            Restart Service
+          </span>
+        </button>
       </div>
 
       <!-- Stats Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <!-- Status Card -->
-        <div class="glass rounded-xl p-4">
-          <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">
-            VPN Status
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Status Detail -->
+        <div class="card rounded-xl p-5">
+          <div
+            class="text-zinc-500 text-[11px] font-bold uppercase tracking-wider mb-2"
+          >
+            Connection Status
           </div>
-          <div class="flex items-center gap-2">
-            <div
-              id="status-indicator"
-              class="w-2 h-2 rounded-full bg-gray-500"
-            ></div>
-            <div id="vpn-status" class="text-xl font-semibold">Checking...</div>
+          <div
+            id="vpn-status-display"
+            class="text-xl font-medium text-white tracking-tight"
+          >
+            Checking...
           </div>
         </div>
 
         <!-- IP Card -->
-        <div class="glass rounded-xl p-4">
-          <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">
+        <div class="card rounded-xl p-5">
+          <div
+            class="text-zinc-500 text-[11px] font-bold uppercase tracking-wider mb-2"
+          >
             Public IP
           </div>
-          <div id="public-ip" class="text-xl font-semibold font-mono">
+          <div
+            id="public-ip"
+            class="text-xl font-mono text-white tracking-tight"
+          >
             ---.---.---.---
           </div>
         </div>
 
         <!-- Uptime Card -->
-        <div class="glass rounded-xl p-4">
-          <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">
+        <div class="card rounded-xl p-5">
+          <div
+            class="text-zinc-500 text-[11px] font-bold uppercase tracking-wider mb-2"
+          >
             System Uptime
           </div>
-          <div id="uptime" class="text-xl font-semibold">--:--:--</div>
+          <div id="uptime" class="text-xl font-mono text-white tracking-tight">
+            --:--:--
+          </div>
         </div>
 
         <!-- Traffic Card -->
-        <div class="glass rounded-xl p-4">
-          <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">
+        <div class="card rounded-xl p-5">
+          <div
+            class="text-zinc-500 text-[11px] font-bold uppercase tracking-wider mb-2"
+          >
             Total Traffic
           </div>
-          <div id="total-traffic" class="text-xl font-semibold">0 MB</div>
+          <div
+            id="total-traffic"
+            class="text-xl font-mono text-white tracking-tight"
+          >
+            0 MB
+          </div>
         </div>
       </div>
 
-      <!-- Main Content Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Traffic Chart -->
-        <div class="glass rounded-xl p-4 lg:col-span-2">
-          <h3 class="text-slate-400 text-xs uppercase tracking-wider mb-4">
-            Live Bandwidth Usage
-          </h3>
-          <div class="h-64">
+      <!-- Main Content -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[500px]">
+        <!-- Chart -->
+        <div class="card rounded-xl p-6 lg:col-span-2 flex flex-col">
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="text-zinc-400 text-sm font-medium">Network Activity</h3>
+            <div class="flex gap-6 text-xs font-medium">
+              <div class="flex items-center gap-2">
+                <div
+                  class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]"
+                ></div>
+                <span class="text-zinc-400">Download</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div
+                  class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"
+                ></div>
+                <span class="text-zinc-400">Upload</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex-1 w-full relative min-h-0">
             <canvas id="trafficChart"></canvas>
           </div>
         </div>
 
         <!-- Logs -->
-        <div class="glass rounded-xl p-4 flex flex-col h-[340px]">
-          <h3 class="text-slate-400 text-xs uppercase tracking-wider mb-4">
-            System Logs
-          </h3>
+        <div
+          class="card rounded-xl p-0 flex flex-col overflow-hidden border-zinc-800"
+        >
+          <div
+            class="px-4 py-3 border-b border-white/5 bg-white/[0.02] flex justify-between items-center"
+          >
+            <div class="flex gap-4">
+              <button
+                onclick="setLogType('openvpn')"
+                id="tab-openvpn"
+                class="text-xs font-bold uppercase tracking-wider flex items-center gap-2 text-zinc-100 border-b-2 border-blue-500 pb-0.5 transition-colors"
+              >
+                <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                OpenVPN
+              </button>
+              <button
+                onclick="setLogType('tinyproxy')"
+                id="tab-tinyproxy"
+                class="text-xs font-bold uppercase tracking-wider flex items-center gap-2 text-zinc-500 hover:text-zinc-300 pb-0.5 transition-colors"
+              >
+                <span
+                  class="w-2 h-2 rounded-full bg-purple-500 opacity-50"
+                ></span>
+                Tinyproxy
+              </button>
+              <button
+                onclick="setLogType('dante')"
+                id="tab-dante"
+                class="text-xs font-bold uppercase tracking-wider flex items-center gap-2 text-zinc-500 hover:text-zinc-300 pb-0.5 transition-colors"
+              >
+                <span
+                  class="w-2 h-2 rounded-full bg-orange-500 opacity-50"
+                ></span>
+                Dante
+              </button>
+            </div>
+            <span id="log-filename" class="text-[10px] text-zinc-600 font-mono"
+              >tail -f openvpn.log</span
+            >
+          </div>
           <div
             id="logs-container"
-            class="flex-1 overflow-y-auto font-mono text-xs text-slate-300 bg-black/20 p-3 rounded-lg whitespace-pre-wrap"
+            class="flex-1 overflow-y-auto p-4 font-mono text-[11px] text-zinc-400 leading-relaxed whitespace-pre-wrap bg-[#0c0c0e]"
           >
-            Loading logs...
+            <span class="animate-pulse text-zinc-600">Waiting for logs...</span>
           </div>
         </div>
       </div>
@@ -109,39 +252,85 @@
     <script>
       // Chart Setup
       const ctx = document.getElementById("trafficChart").getContext("2d");
+
+      // Gradient for charts
+      const gradientRx = ctx.createLinearGradient(0, 0, 0, 400);
+      gradientRx.addColorStop(0, "rgba(59, 130, 246, 0.2)");
+      gradientRx.addColorStop(1, "rgba(59, 130, 246, 0)");
+
+      const gradientTx = ctx.createLinearGradient(0, 0, 0, 400);
+      gradientTx.addColorStop(0, "rgba(16, 185, 129, 0.2)");
+      gradientTx.addColorStop(1, "rgba(16, 185, 129, 0)");
+
       const trafficChart = new Chart(ctx, {
         type: "line",
         data: {
-          labels: Array(20).fill(""),
+          labels: Array(30).fill(""),
           datasets: [
             {
-              label: "Download (KB/s)",
-              data: Array(20).fill(0),
+              label: "Download",
+              data: Array(30).fill(0),
               borderColor: "#3b82f6",
-              tension: 0.4,
+              backgroundColor: gradientRx,
               borderWidth: 2,
               pointRadius: 0,
+              pointHoverRadius: 4,
+              fill: true,
+              tension: 0.4,
             },
             {
-              label: "Upload (KB/s)",
-              data: Array(20).fill(0),
+              label: "Upload",
+              data: Array(30).fill(0),
               borderColor: "#10b981",
-              tension: 0.4,
+              backgroundColor: gradientTx,
               borderWidth: 2,
               pointRadius: 0,
+              pointHoverRadius: 4,
+              fill: true,
+              tension: 0.4,
             },
           ],
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { display: true, labels: { color: "#94a3b8" } } },
+          interaction: {
+            mode: "index",
+            intersect: false,
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: "rgba(24, 24, 27, 0.9)",
+              titleColor: "#e4e4e7",
+              bodyColor: "#a1a1aa",
+              borderColor: "rgba(255,255,255,0.1)",
+              borderWidth: 1,
+              padding: 10,
+              displayColors: true,
+              callbacks: {
+                label: function (context) {
+                  return (
+                    context.dataset.label +
+                    ": " +
+                    context.parsed.y.toFixed(1) +
+                    " KB/s"
+                  );
+                },
+              },
+            },
+          },
           scales: {
             y: {
-              grid: { color: "rgba(255,255,255,0.05)" },
-              ticks: { color: "#64748b" },
+              position: "right",
+              grid: { color: "rgba(255,255,255,0.03)", drawBorder: false },
+              ticks: { color: "#52525b", font: { size: 10, family: "Inter" } },
+              beginAtZero: true,
             },
-            x: { display: false },
+            x: {
+              display: false,
+              grid: { display: false },
+            },
           },
           animation: { duration: 0 },
         },
@@ -149,24 +338,72 @@
 
       let lastRx = 0;
       let lastTx = 0;
+      let currentLogType = "openvpn";
+
+      function setLogType(type) {
+        currentLogType = type;
+
+        // Update Tabs UI
+        ["openvpn", "tinyproxy", "dante"].forEach((t) => {
+          const btn = document.getElementById(`tab-${t}`);
+          if (t === type) {
+            btn.className =
+              "text-xs font-bold uppercase tracking-wider flex items-center gap-2 text-zinc-100 border-b-2 border-blue-500 pb-0.5 transition-colors";
+            btn.querySelector("span").classList.remove("opacity-50");
+          } else {
+            btn.className =
+              "text-xs font-bold uppercase tracking-wider flex items-center gap-2 text-zinc-500 hover:text-zinc-300 pb-0.5 transition-colors";
+            btn.querySelector("span").classList.add("opacity-50");
+          }
+        });
+
+        // Update filename display
+        const filenames = {
+          openvpn: "tail -f openvpn.log",
+          tinyproxy: "tail -f tinyproxy.log",
+          dante: "tail -f danted.log",
+        };
+        document.getElementById("log-filename").textContent = filenames[type];
+
+        // Clear current logs temporarily to show loading or just refresh immediately
+        // document.getElementById("logs-container").textContent = "Loading...";
+        updateLogs();
+      }
 
       async function updateStats() {
         try {
           const response = await fetch("/api/status");
           const data = await response.json();
 
-          // Update Status
-          const statusEl = document.getElementById("vpn-status");
-          const indicatorEl = document.getElementById("status-indicator");
-          statusEl.textContent = data.vpn_status;
+          // Update Status UI
+          const statusTextEl = document.getElementById("status-text");
+          const statusDotEl = document.getElementById("status-dot");
+          const statusPingEl = document.getElementById("status-ping");
+          const vpnStatusDisplay =
+            document.getElementById("vpn-status-display");
 
           if (data.vpn_status === "Connected") {
-            statusEl.className = "text-xl font-semibold text-emerald-400";
-            indicatorEl.className =
-              "w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]";
+            statusTextEl.textContent = "System Operational";
+            statusTextEl.className = "text-emerald-400 text-sm font-medium";
+
+            statusDotEl.className =
+              "relative inline-flex rounded-full h-2 w-2 bg-emerald-500";
+            statusPingEl.classList.remove("hidden");
+
+            vpnStatusDisplay.textContent = "Active Tunnel";
+            vpnStatusDisplay.className =
+              "text-xl font-medium text-emerald-400 tracking-tight";
           } else {
-            statusEl.className = "text-xl font-semibold text-red-400";
-            indicatorEl.className = "w-2 h-2 rounded-full bg-red-500";
+            statusTextEl.textContent = "Disconnected";
+            statusTextEl.className = "text-red-400 text-sm font-medium";
+
+            statusDotEl.className =
+              "relative inline-flex rounded-full h-2 w-2 bg-red-500";
+            statusPingEl.classList.add("hidden");
+
+            vpnStatusDisplay.textContent = "Disconnected";
+            vpnStatusDisplay.className =
+              "text-xl font-medium text-red-400 tracking-tight";
           }
 
           // Update other text stats
@@ -203,11 +440,20 @@
 
       async function updateLogs() {
         try {
-          const response = await fetch("/api/logs");
+          const response = await fetch(`/api/logs?type=${currentLogType}`);
           const data = await response.json();
           const logsContainer = document.getElementById("logs-container");
+
+          // Only scroll if we are already near the bottom or if it's the first load
+          const isScrolledToBottom =
+            logsContainer.scrollHeight - logsContainer.clientHeight <=
+            logsContainer.scrollTop + 50;
+
           logsContainer.textContent = data.logs;
-          logsContainer.scrollTop = logsContainer.scrollHeight;
+
+          if (isScrolledToBottom || logsContainer.textContent.length < 1000) {
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+          }
         } catch (e) {
           console.error("Failed to fetch logs", e);
         }
