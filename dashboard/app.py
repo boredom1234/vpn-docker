@@ -3,6 +3,7 @@ import subprocess
 import os
 import time
 import psutil
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
@@ -103,6 +104,103 @@ def restart_vpn():
         return jsonify({"status": "success", "message": "VPN restarting..."})
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
+
+
+@app.route("/api/configs", methods=["GET"])
+def list_configs():
+    try:
+        configs = []
+        active_config = ""
+        
+        if os.path.exists("/etc/vpn-active-config"):
+            with open("/etc/vpn-active-config", "r") as f:
+                active_config = f.read().strip()
+
+        for filename in os.listdir("/vpn"):
+            if filename.endswith(".ovpn"):
+                full_path = os.path.join("/vpn", filename)
+                configs.append({
+                    "name": filename,
+                    "active": full_path == active_config
+                })
+        
+        return jsonify({"configs": configs})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/configs/upload", methods=["POST"])
+def upload_config():
+    try:
+        if "file" not in request.files:
+            return jsonify({"error": "No file part"}), 400
+        
+        file = request.files["file"]
+        if file.filename == "":
+            return jsonify({"error": "No selected file"}), 400
+            
+        if file and file.filename.endswith(".ovpn"):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join("/vpn", filename))
+            return jsonify({"message": "File uploaded successfully"})
+            
+        return jsonify({"error": "Invalid file type"}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/configs/activate", methods=["POST"])
+def activate_config():
+    try:
+        data = request.get_json()
+        filename = data.get("filename")
+        
+        if not filename:
+            return jsonify({"error": "Filename required"}), 400
+            
+        config_path = os.path.join("/vpn", filename)
+        if not os.path.exists(config_path):
+            return jsonify({"error": "Config file not found"}), 404
+            
+        # Update active config pointer
+        with open("/etc/vpn-active-config", "w") as f:
+            f.write(config_path)
+            
+        # Kill openvpn to trigger watchdog restart with new config
+        subprocess.run(["killall", "openvpn"])
+        
+        return jsonify({"message": "Switching configuration..."})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/configs/delete", methods=["POST"])
+def delete_config():
+    try:
+        data = request.get_json()
+        filename = data.get("filename")
+        
+        if not filename:
+            return jsonify({"error": "Filename required"}), 400
+            
+        config_path = os.path.join("/vpn", filename)
+        
+        # Check if active
+        active_config = ""
+        if os.path.exists("/etc/vpn-active-config"):
+            with open("/etc/vpn-active-config", "r") as f:
+                active_config = f.read().strip()
+                
+        if config_path == active_config:
+            return jsonify({"error": "Cannot delete active configuration"}), 400
+            
+        if os.path.exists(config_path):
+            os.remove(config_path)
+            return jsonify({"message": "Configuration deleted"})
+            
+        return jsonify({"error": "File not found"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == "__main__":

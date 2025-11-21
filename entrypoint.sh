@@ -34,6 +34,16 @@ for dns in $DNS_SERVERS; do
     echo "nameserver $dns" >> /etc/resolv.conf
 done
 
+# Add static routes for DNS servers via default gateway to ensure they are always reachable via eth0
+# This prevents DNS resolution failures when OpenVPN restarts and the default route is messed up
+DEFAULT_GW=$(ip route show default | awk '/default/ {print $3}')
+if [ -n "$DEFAULT_GW" ]; then
+    echo "Adding static routes for DNS servers via $DEFAULT_GW..."
+    for dns in $DNS_SERVERS; do
+        ip route add "$dns" via "$DEFAULT_GW" dev eth0 2>/dev/null || true
+    done
+fi
+
 # 3. Setup Tinyproxy Auth if provided
 if [ -n "$PROXY_USER" ] && [ -n "$PROXY_PASS" ]; then
     echo "Enabling Basic Auth for Tinyproxy..."
@@ -48,7 +58,10 @@ if [ ! -c /dev/net/tun ]; then
     mknod /dev/net/tun c 10 200
 fi
 
-openvpn --config "$OVPN_FILE" --daemon --log "$LOG_DIR/openvpn.log" --writepid /var/run/openvpn.pid
+# Initialize active config tracking
+echo "$OVPN_FILE" > /etc/vpn-active-config
+
+openvpn --config "$(cat /etc/vpn-active-config)" --daemon --log "$LOG_DIR/openvpn.log" --writepid /var/run/openvpn.pid
 
 # 5. Wait for VPN Connection
 echo "Waiting for tun0 interface..."
@@ -108,6 +121,10 @@ iptables -A INPUT -i tun0 -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A OUTPUT -o eth0 -p udp -m multiport --dports 1194,443,1195 -j ACCEPT
 iptables -A OUTPUT -o eth0 -p tcp -m multiport --dports 1194,443,1195 -j ACCEPT
 iptables -A INPUT -i eth0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Allow DNS on eth0 for initial resolution (essential for VPN server lookup)
+iptables -A OUTPUT -o eth0 -p udp --dport 53 -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --dport 53 -j ACCEPT
 
 # Allow DNS through VPN tunnel (port 53 UDP/TCP)
 iptables -A OUTPUT -o tun0 -p udp --dport 53 -j ACCEPT

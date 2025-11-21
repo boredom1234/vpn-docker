@@ -2,4 +2,4 @@
 *.log
 
 # Logs directory
-/logs/
+logs

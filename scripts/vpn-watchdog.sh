@@ -9,26 +9,52 @@ log() {
 }
 
 log "Starting VPN Watchdog..."
+TUN_STATUS="DOWN"
 
 while true; do
     # Check if OpenVPN process is running
     if ! pgrep -x openvpn > /dev/null; then
-        log "CRITICAL: OpenVPN process is not running!"
-        # In a real scenario, we might want to trigger a restart or exit the container
-        # For now, we'll just log it, as the main entrypoint should handle restarts or the container will die
+        log "CRITICAL: OpenVPN process is not running! Restarting..."
+        
+        # Get active config
+        if [ -f /etc/vpn-active-config ]; then
+            ACTIVE_CONFIG=$(cat /etc/vpn-active-config)
+        else
+            ACTIVE_CONFIG="/vpn/client.ovpn" # Fallback
+        fi
+
+        log "Restarting with config: $ACTIVE_CONFIG"
+        
+        # Restart OpenVPN
+        openvpn --config "$ACTIVE_CONFIG" --daemon --log "/var/log/vpn/openvpn.log" --writepid /var/run/openvpn.pid
+        
+        # Wait for it to initialize
+        sleep 5
     fi
 
     # Check if tun0 interface exists
-    if ! ip addr show tun0 > /dev/null 2>&1; then
-        log "WARNING: tun0 interface not found!"
+    if ip addr show tun0 > /dev/null 2>&1; then
+        # tun0 is UP
+        if [ "$TUN_STATUS" != "UP" ]; then
+            log "VPN Connection Restored (tun0 up). Restarting proxies..."
+            TUN_STATUS="UP"
+            
+            # Restart Proxies to bind to new interface
+            killall tinyproxy danted 2>/dev/null || true
+            sleep 1
+            tinyproxy -c /etc/tinyproxy/tinyproxy.conf
+            danted -D -f /etc/danted.conf
+        fi
     else
-        # Optional: Ping check to verify connectivity through tunnel
-        # ping -c 1 -I tun0 8.8.8.8 > /dev/null 2>&1
-        # if [ $? -ne 0 ]; then
-        #     log "WARNING: Connectivity check through tun0 failed!"
-        # fi
-        :
+        # tun0 is DOWN
+        if [ "$TUN_STATUS" == "UP" ]; then
+            log "WARNING: VPN Connection dropped (tun0 down)."
+            TUN_STATUS="DOWN"
+        fi
+        
+        # If tun0 is down for too long, maybe we should force kill OpenVPN?
+        # For now, we rely on OpenVPN's internal reconnect or the process dying.
     fi
 
-    sleep 30
+    sleep 5
 done

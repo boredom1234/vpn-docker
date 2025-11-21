@@ -89,27 +89,41 @@
             </p>
           </div>
         </div>
-        <button
-          onclick="restartVPN()"
-          class="group relative px-5 py-2.5 bg-red-500/5 hover:bg-red-500/10 text-red-400 rounded-lg border border-red-500/20 hover:border-red-500/30 transition-all duration-300 text-sm font-medium overflow-hidden"
-        >
-          <span class="relative z-10 flex items-center gap-2">
-            <svg
-              class="w-4 h-4 transition-transform group-hover:rotate-180"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-              ></path>
-            </svg>
-            Restart Service
-          </span>
-        </button>
+        <div class="flex gap-3">
+          <button
+            onclick="openConfigModal()"
+            class="group relative px-5 py-2.5 bg-blue-500/5 hover:bg-blue-500/10 text-blue-400 rounded-lg border border-blue-500/20 hover:border-blue-500/30 transition-all duration-300 text-sm font-medium overflow-hidden"
+          >
+            <span class="relative z-10 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              Configs
+            </span>
+          </button>
+          <button
+            onclick="restartVPN()"
+            class="group relative px-5 py-2.5 bg-red-500/5 hover:bg-red-500/10 text-red-400 rounded-lg border border-red-500/20 hover:border-red-500/30 transition-all duration-300 text-sm font-medium overflow-hidden"
+          >
+            <span class="relative z-10 flex items-center gap-2">
+              <svg
+                class="w-4 h-4 transition-transform group-hover:rotate-180"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                ></path>
+              </svg>
+              Restart
+            </span>
+          </button>
+        </div>
       </div>
 
       <!-- Stats Grid -->
@@ -245,6 +259,49 @@
           >
             <span class="animate-pulse text-zinc-600">Waiting for logs...</span>
           </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- Config Modal -->
+    <div
+      id="config-modal"
+      class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 transition-opacity duration-300 opacity-0"
+    >
+      <div
+        class="bg-[#18181b] border border-zinc-800 rounded-xl w-full max-w-lg p-6 shadow-2xl transform transition-all duration-300 scale-95"
+      >
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-lg font-medium text-white">VPN Configurations</h3>
+          <button
+            onclick="closeConfigModal()"
+            class="text-zinc-500 hover:text-white transition-colors"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="mb-6 p-4 border border-dashed border-zinc-700 rounded-lg bg-zinc-900/50 hover:bg-zinc-900 transition-colors">
+            <div class="flex items-center justify-between">
+                <div class="text-sm text-zinc-400">
+                    <span class="font-medium text-zinc-300">Upload .ovpn file</span>
+                    <p class="text-xs mt-1">Drag & drop or click to browse</p>
+                </div>
+                <input type="file" id="config-upload" accept=".ovpn" class="hidden" onchange="handleFileUpload(this)">
+                <button onclick="document.getElementById('config-upload').click()" class="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-white rounded-md transition-colors">
+                    Browse
+                </button>
+            </div>
+        </div>
+
+        <!-- Config List -->
+        <div class="space-y-2 max-h-[300px] overflow-y-auto pr-2" id="config-list">
+          <!-- Populated by JS -->
+          <div class="text-center text-zinc-500 py-4">Loading...</div>
         </div>
       </div>
     </div>
@@ -468,6 +525,119 @@
           alert(data.message);
         } catch (e) {
           alert("Failed to restart VPN");
+        }
+      }
+
+      // Config Modal Logic
+      const modal = document.getElementById("config-modal");
+      
+      function openConfigModal() {
+        modal.classList.remove("hidden");
+        // Small delay to allow display:block to apply before opacity transition
+        setTimeout(() => {
+            modal.classList.remove("opacity-0");
+            modal.querySelector("div").classList.remove("scale-95");
+            modal.querySelector("div").classList.add("scale-100");
+        }, 10);
+        loadConfigs();
+      }
+
+      function closeConfigModal() {
+        modal.classList.add("opacity-0");
+        modal.querySelector("div").classList.remove("scale-100");
+        modal.querySelector("div").classList.add("scale-95");
+        setTimeout(() => {
+            modal.classList.add("hidden");
+        }, 300);
+      }
+
+      async function loadConfigs() {
+        const listEl = document.getElementById("config-list");
+        try {
+            const res = await fetch("/api/configs");
+            const data = await res.json();
+            
+            listEl.innerHTML = data.configs.map(conf => `
+                <div class="flex items-center justify-between p-3 rounded-lg ${conf.active ? 'bg-blue-500/10 border border-blue-500/20' : 'bg-zinc-900 border border-zinc-800'}">
+                    <div class="flex items-center gap-3">
+                        <div class="w-2 h-2 rounded-full ${conf.active ? 'bg-blue-500' : 'bg-zinc-600'}"></div>
+                        <span class="text-sm font-medium ${conf.active ? 'text-blue-400' : 'text-zinc-300'}">${conf.name}</span>
+                    </div>
+                    <div class="flex gap-2">
+                        ${!conf.active ? `
+                        <button onclick="activateConfig('${conf.name}')" class="p-1.5 text-zinc-400 hover:text-emerald-400 transition-colors" title="Activate">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </button>
+                        <button onclick="deleteConfig('${conf.name}')" class="p-1.5 text-zinc-400 hover:text-red-400 transition-colors" title="Delete">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                        ` : '<span class="text-xs text-blue-500 font-medium px-2 py-1">Active</span>'}
+                    </div>
+                </div>
+            `).join('');
+        } catch(e) {
+            listEl.innerHTML = '<div class="text-red-500 text-center text-sm">Failed to load configs</div>';
+        }
+      }
+
+      async function activateConfig(filename) {
+        if(!confirm(`Switch to ${filename}? This will restart the VPN.`)) return;
+        
+        try {
+            const res = await fetch("/api/configs/activate", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({filename})
+            });
+            const data = await res.json();
+            if(data.error) throw new Error(data.error);
+            
+            alert("Configuration switched! VPN is restarting...");
+            closeConfigModal();
+            // Reset status UI to show it's reconnecting
+            document.getElementById("vpn-status-display").textContent = "Reconnecting...";
+            document.getElementById("vpn-status-display").className = "text-xl font-medium text-yellow-500 tracking-tight";
+        } catch(e) {
+            alert(e.message);
+        }
+      }
+
+      async function deleteConfig(filename) {
+        if(!confirm(`Delete ${filename}?`)) return;
+        
+        try {
+            const res = await fetch("/api/configs/delete", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({filename})
+            });
+            const data = await res.json();
+            if(data.error) throw new Error(data.error);
+            
+            loadConfigs();
+        } catch(e) {
+            alert(e.message);
+        }
+      }
+
+      async function handleFileUpload(input) {
+        if(!input.files[0]) return;
+        
+        const formData = new FormData();
+        formData.append("file", input.files[0]);
+        
+        try {
+            const res = await fetch("/api/configs/upload", {
+                method: "POST",
+                body: formData
+            });
+            const data = await res.json();
+            if(data.error) throw new Error(data.error);
+            
+            loadConfigs();
+            input.value = ""; // Reset input
+        } catch(e) {
+            alert(e.message);
         }
       }
 
